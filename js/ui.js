@@ -25,12 +25,10 @@ class Interface
 
 				out = `
 					<div class="card-image">
-        				<img width="50" src="spinner.gif">
-        				<a class="btn-floating btn-large halfway-fab">
-        					<i class="material-icons">
-        						<img class="" src="spinner.gif">
-        					</i>
-        				</a>
+        				<img id="spinner2" width="50" src="spinner.gif">
+        				<div class="btn-floating btn-large halfway-fab">
+        					<img id="spinner" alt="" width="50" heigth="500" class="circle responsive-img valign" src="spinner.gif">
+        				</div>
         			</div>
         			<div class="card-content">
 						<span class="card-title brown-text text-darken-4 center"><h4>${userName}</h4></span>
@@ -47,16 +45,16 @@ class Interface
 				const userImg = await imageLoaded(userImage);
 				console.log('Imagen Imagen de Usuario Cargada!');
 
-				let spinner = cardOut.querySelector('i').childNodes[1];
-				//cardOut.querySelector('i').replaceChild(userImg,spinner);
+				let spinner = cardOut.querySelector('#spinner');
+				cardOut.querySelector('#spinner').parentElement.replaceChild(userImg,spinner);
 
 				// Imagen Principal
 				console.log('Cargando Imagen Principal...');
 				const img = await imageLoaded(imageUrl);
 				console.log('Imagen Principal Cargada!');
 
-				spinner = cardOut.querySelector('.card-image').childNodes[1];
-				cardOut.querySelector('.card-image').replaceChild(img,spinner);
+				spinner = cardOut.querySelector('#spinner2');
+				cardOut.querySelector('#spinner2').parentElement.replaceChild(img,spinner);
 			});
 	}
 }
