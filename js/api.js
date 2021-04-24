@@ -23,9 +23,9 @@ class Api
 				console.log('Volviendo a buscar...');
 				convertir = false;
 			});
-
-		// No existe la imagen...
-		if(!convertir)
+		console.log(res);
+		// No existe la imagen o existe un error en la respuesta.
+		if(!convertir || res.status == 400)
 		{
 			return this.getPhoto();
 		}
@@ -33,7 +33,6 @@ class Api
 		{
 			console.log('Convirtiendo en JSON...');
 			const data = await res.json();
-
 			const type = data.hits[0].type;
 			
 			// La imagen encontrada no es una Foto...

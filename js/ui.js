@@ -2,6 +2,7 @@ class Interface
 {
 	constructor()
 	{
+		// 7642
 		this.init();
 	}
 
@@ -78,7 +79,6 @@ function imageLoaded(src, alt = '') {
 
         image.addEventListener('load', function()
         {
-        	console.log('Hola');
             resolve(image);
         });
     });
