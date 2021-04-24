@@ -12,6 +12,7 @@ class Api
 		let convertir = true;
 
 		let id = ranNumber(70000,0);
+		// id = 1; // Testeo
 
 		console.log('Esperando respuesta de la API...');
 		const res = await fetch(`https://pixabay.com/api/?key=${this.apiKey}&id=${id}`)

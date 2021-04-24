@@ -13,7 +13,8 @@ class Interface
 	genImage()
 	{
 		API.getPhoto()
-			.then( async data => {
+			.then( async data => 
+			{
 
 				// Preparar imagenes
 				const imageUrl 	= data.hits[0].webformatURL;
@@ -24,15 +25,21 @@ class Interface
 				let out = '';
 
 				out = `
-					<div class="card-image">
-        				<img id="spinner2" width="50" src="spinner.gif">
-        				<div class="btn-floating btn-large halfway-fab">
-        					<img id="spinner" alt="" width="50" heigth="500" class="circle responsive-img valign" src="spinner.gif">
-        				</div>
+				<div class="container">
+					<div class="card deep-orange darken-4">
+        				<div class="card-image">
+	        				<div id="spnImg" class="lds-ring center"><div></div><div></div><div></div><div></div></div>
+	        				<div class="btn-floating btn-large halfway-fab">
+	        					<div id="spnUser" class="lds-ring center"><div></div><div></div><div></div><div></div></div>
+	        				</div>
+	        			</div>
+	        			<div class="card-content">
+							<span class="card-title brown-text text-darken-4 center"><h5>${userName}</h5></span>
+						</div>
         			</div>
-        			<div class="card-content">
-						<span class="card-title brown-text text-darken-4 center"><h4>${userName}</h4></span>
-					</div>
+				</div>
+						
+					
 				`;
 
 				// Inyectar Estructura de carta Html
@@ -43,18 +50,18 @@ class Interface
 				// Imagen de Usuario
 				console.log('Cargando Imagen de Usuario...');
 				const userImg = await imageLoaded(userImage);
-				console.log('Imagen Imagen de Usuario Cargada!');
+				console.log('Imagen de Usuario Cargada!');
 
-				let spinner = cardOut.querySelector('#spinner');
-				cardOut.querySelector('#spinner').parentElement.replaceChild(userImg,spinner);
+				let spinner = cardOut.querySelector('#spnUser');
+				cardOut.querySelector('#spnUser').parentElement.replaceChild(userImg,spinner);
 
 				// Imagen Principal
 				console.log('Cargando Imagen Principal...');
 				const img = await imageLoaded(imageUrl);
 				console.log('Imagen Principal Cargada!');
 
-				spinner = cardOut.querySelector('#spinner2');
-				cardOut.querySelector('#spinner2').parentElement.replaceChild(img,spinner);
+				spinner = cardOut.querySelector('#spnImg');
+				cardOut.querySelector('#spnImg').parentElement.replaceChild(img,spinner);
 			});
 	}
 }
@@ -71,6 +78,7 @@ function imageLoaded(src, alt = '') {
 
         image.addEventListener('load', function()
         {
+        	console.log('Hola');
             resolve(image);
         });
     });
@@ -88,3 +96,6 @@ function imageLoaded(src, alt = '') {
 // 						    </div>
 // 						</nav>
 // 					</div>
+
+// <img id="spinner" alt="" width="50" heigth="500" class="circle responsive-img valign" src="spinner.gif"><div class="lds-ring center">
+// <img id="spinner2" width="50" src="spinner.gif">
