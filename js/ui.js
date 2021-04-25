@@ -17,10 +17,13 @@ class Interface
 			.then( async data => 
 			{
 
-				// Preparar imagenes
+				// Preparar datos de salida
 				const imageUrl 	= data.hits[0].webformatURL;
 				const userName 	= data.hits[0].user;
 				const userImage = data.hits[0].userImageURL;
+				const likes 	= data.hits[0].likes;
+				const downloads = data.hits[0].downloads;
+				const views 	= data.hits[0].views;
 
 				// Crear Estrcutura Html
 				let out = '';
@@ -31,11 +34,26 @@ class Interface
         				<div class="card-image">
 	        				<div id="spnImg" class="lds-ring center"><div></div><div></div><div></div><div></div></div>
 	        				<div class="btn-floating btn-large halfway-fab">
-	        					<div id="spnUser" class="lds-ring center"><div></div><div></div><div></div><div></div></div>
+	        					<i id="spnUser" class="fas fa-user"></i>
 	        				</div>
 	        			</div>
 	        			<div class="card-content">
-							<span class="card-title brown-text text-darken-4 center"><h5>${userName}</h5></span>
+							<div class="row">
+								<div class="hr-h col s12">
+									<span class="card-title brown-text text-darken-4 center">${userName}</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="hr-v col s4">
+									<i class="fas fa-thumbs-up small"></i><h6>${likes}</h6>
+								</div>
+								<div class="hr-v col s4">
+									<i class="fas fa-eye small"></i><h6>${views}</h6>
+								</div>
+								<div class="col s4">
+									<i class="fas fa-download small"></i><h6>${downloads}</h6>
+								</div>
+							</div>
 						</div>
         			</div>
 				</div>
@@ -68,8 +86,8 @@ class Interface
 }
 
 // Funciones para precargar imagenes
-function imageLoaded(src, alt = '') {
-
+function imageLoaded(src, alt = '') 
+{
     return new Promise ( resolve => 
     {
         const image = document.createElement('img');
@@ -98,4 +116,4 @@ function imageLoaded(src, alt = '') {
 // 					</div>
 
 // <img id="spinner" alt="" width="50" heigth="500" class="circle responsive-img valign" src="spinner.gif"><div class="lds-ring center">
-// <img id="spinner2" width="50" src="spinner.gif">
+// <img id="spinner2" width="50" src="spinner.gif"> <span class="card-title brown-text text-darken-4 center"><i class="fas fa-user"></i><h6>${userName}</h6></span>

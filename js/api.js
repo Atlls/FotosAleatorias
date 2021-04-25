@@ -23,7 +23,7 @@ class Api
 				console.log('Volviendo a buscar...');
 				convertir = false;
 			});
-		console.log(res);
+			
 		// No existe la imagen o existe un error en la respuesta.
 		if(!convertir || res.status == 400)
 		{

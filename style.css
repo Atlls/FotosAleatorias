@@ -5,6 +5,26 @@ body{
   height: 100vh;
 }
 
+.container{
+  width: 98%;
+}
+
+.card .card-content{
+  padding: 10px;
+}
+
+#spnImg{
+  margin-top: 20px;
+}
+
+.hr-h{
+  border-bottom: 1px solid;
+}
+
+.hr-v{
+  border-right: 1px solid;
+}
+
 /*Spinner*/
 .lds-ring {
   display: inline-block;
