@@ -3,8 +3,6 @@ class Api
 	constructor(apiKey)
 	{
 		this.apiKey = apiKey;
-		//this.idImage = ranNumber(80000,1); // 39884 id de error
-		//this.url = `https://pixabay.com/api/?key=${apiKey}&id=39884`;//image_type=photo&per_page=200;
 	}
 
 	async getPhoto()
@@ -13,11 +11,14 @@ class Api
 
 		let id = ranNumber(70000,0);
 		// id = 1; // Testeo
+		// 39884 -> id de error por no existir dicha petición.
+		// 7642 -> id de error pore status "400".
 
 		console.log('Esperando respuesta de la API...');
 		const res = await fetch(`https://pixabay.com/api/?key=${this.apiKey}&id=${id}`)
-			.catch(error =>
+
 			// No existe dicha id
+			.catch(error =>
 			{
 				console.log(`ID "${id}" Inexitente...`);
 				console.log('Volviendo a buscar...');

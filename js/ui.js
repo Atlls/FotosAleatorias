@@ -2,13 +2,23 @@ class Interface
 {
 	constructor()
 	{
-		// 7642
 		this.init();
 	}
 
 	init()
-	{
+	{	
+		this.putSpinner();
 		this.genImage();
+	}
+
+	putSpinner()
+	{
+		elmOut.innerHTML = `
+			<div class="lds-ring center"><div></div><div></div><div></div><div></div></div>
+			<h6 class="white-text">
+               Buscando Imagen Aleatoria... 
+            </h6>
+		`;
 	}
 
 	genImage()
@@ -16,6 +26,10 @@ class Interface
 		API.getPhoto()
 			.then( async data => 
 			{
+
+				// Verificar visibilidad del botón de re-búsqueda
+				if(btn.classList.contains('hide'))
+					btn.classList.remove('hide');
 
 				// Preparar datos de salida
 				const imageUrl 	= data.hits[0].webformatURL;
@@ -29,6 +43,9 @@ class Interface
 				let out = '';
 
 				out = `
+
+				<!-- Carta con la data de la imagen -->
+
 				<div class="container">
 					<div class="card deep-orange darken-4">
         				<div class="card-image">
@@ -57,12 +74,10 @@ class Interface
 						</div>
         			</div>
 				</div>
-						
-					
 				`;
 
 				// Inyectar Estructura de carta Html
-				cardOut.innerHTML = out;
+				elmOut.innerHTML = out;
 
 				/* Crear Imagenes e ir inyectando... */
 
@@ -71,16 +86,21 @@ class Interface
 				const userImg = await imageLoaded(userImage);
 				console.log('Imagen de Usuario Cargada!');
 
-				let spinner = cardOut.querySelector('#spnUser');
-				cardOut.querySelector('#spnUser').parentElement.replaceChild(userImg,spinner);
+				let spinner = elmOut.querySelector('#spnUser');
+				elmOut.querySelector('#spnUser').parentElement.replaceChild(userImg,spinner);
 
 				// Imagen Principal
 				console.log('Cargando Imagen Principal...');
 				const img = await imageLoaded(imageUrl);
 				console.log('Imagen Principal Cargada!');
 
-				spinner = cardOut.querySelector('#spnImg');
-				cardOut.querySelector('#spnImg').parentElement.replaceChild(img,spinner);
+				spinner = elmOut.querySelector('#spnImg');
+				elmOut.querySelector('#spnImg').parentElement.replaceChild(img,spinner);
+
+				/* Habilitar botón de re-busqueda */
+
+				btn.classList.remove('disabled');
+				btn.classList.remove('pulse');
 			});
 	}
 }
@@ -117,3 +137,13 @@ function imageLoaded(src, alt = '')
 
 // <img id="spinner" alt="" width="50" heigth="500" class="circle responsive-img valign" src="spinner.gif"><div class="lds-ring center">
 // <img id="spinner2" width="50" src="spinner.gif"> <span class="card-title brown-text text-darken-4 center"><i class="fas fa-user"></i><h6>${userName}</h6></span>
+
+// <!-- Botón de re-búsqueda -->
+
+// 				<div class="container">
+// 					<div class="row">
+// 						<button class="btn-floating btn-large pulse waves-effect waves-light" type="submit" name="action">
+//     						<i class="fas fa-search"></i>
+//   						</button>
+// 					</div>
+// 				</div>

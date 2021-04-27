@@ -9,6 +9,15 @@ body{
   width: 98%;
 }
 
+.fixed{
+  position: fixed;
+  height: 5rem;
+  width: 5rem;
+  bottom: 1vh;
+  right: 1vh;
+  z-index: 1;
+}
+
 .card .card-content{
   padding: 10px;
 }
