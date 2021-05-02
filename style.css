@@ -1,12 +1,57 @@
+*{
+  font-family: monospace;
+}
 
-/* Hacer el body del tamaño de la pantalla del dispositivo
-para centrar posteriormente. */
-body{
-  height: 100vh;
+/*ScrollBar*/
+::-webkit-scrollbar{
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: #33691e;
+  border-radius: 5px;
+}
+
+.row{
+  margin: 0;
 }
 
 .container{
-  width: 98%;
+  width: 95%;
+}
+
+nav .nav-wrapper{
+  z-index: 1;
+}
+
+section{
+  height: 85vh;
+}
+
+i{
+  color: #212121;
+}
+
+h5{
+  color: #212121;
+}
+
+.hr-r{
+  border-right: 1px solid;
+}
+
+.card .card-content{
+  padding: 10px;
+}
+
+.card .card-content .card-title{
+  font-family: sans-serif;
+  margin: 0;
+}
+
+#spnImg{
+  color: blue;
+  margin-bottom: 20px;
 }
 
 .fixed{
@@ -16,22 +61,6 @@ body{
   bottom: 1vh;
   right: 1vh;
   z-index: 1;
-}
-
-.card .card-content{
-  padding: 10px;
-}
-
-#spnImg{
-  margin-top: 20px;
-}
-
-.hr-h{
-  border-bottom: 1px solid;
-}
-
-.hr-v{
-  border-right: 1px solid;
 }
 
 /*Spinner*/
@@ -48,10 +77,10 @@ body{
   width: 64px;
   height: 64px;
   margin: 8px;
-  border: 8px solid #fff;
+  border: 8px solid #FFF;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #fff transparent transparent transparent;
+  border-color: #FFF transparent transparent transparent;
 }
 .lds-ring div:nth-child(1) {
   animation-delay: -0.45s;

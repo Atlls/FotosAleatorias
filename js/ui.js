@@ -13,10 +13,13 @@ class Interface
 
 	putSpinner()
 	{
+		// Colocar propiedad "valign-wrapper" y centrar spinner...
+		document.querySelector('section').classList.add('valign-wrapper');
+
 		elmOut.innerHTML = `
 			<div class="lds-ring center"><div></div><div></div><div></div><div></div></div>
 			<h6 class="white-text">
-               Buscando Imagen Aleatoria... 
+            	Buscando Imagen Aleatoria...
             </h6>
 		`;
 	}
@@ -31,7 +34,8 @@ class Interface
 				if(btn.classList.contains('hide'))
 					btn.classList.remove('hide');
 
-				// Preparar datos de salida
+				/* Preparar datos de salida */
+				
 				const imageUrl 	= data.hits[0].webformatURL;
 				const userName 	= data.hits[0].user;
 				const userImage = data.hits[0].userImageURL;
@@ -39,41 +43,43 @@ class Interface
 				const downloads = data.hits[0].downloads;
 				const views 	= data.hits[0].views;
 
+				console.log(data);
+
 				// Crear Estrcutura Html
 				let out = '';
 
 				out = `
 
 				<!-- Carta con la data de la imagen -->
-
-				<div class="container">
-					<div class="card deep-orange darken-4">
-        				<div class="card-image">
-	        				<div id="spnImg" class="lds-ring center"><div></div><div></div><div></div><div></div></div>
-	        				<div class="btn-floating btn-large halfway-fab">
-	        					<i id="spnUser" class="fas fa-user"></i>
-	        				</div>
-	        			</div>
-	        			<div class="card-content">
-							<div class="row">
-								<div class="hr-h col s12">
-									<span class="card-title brown-text text-darken-4 center">${userName}</span>
-								</div>
+				
+				<div class="card light-green darken-4">
+					<div class="card-content">
+						<div class="row">
+							<div class="hr-r col s4">
+								<i class="fas fa-thumbs-up small"></i><h5>${likes}</h5>
 							</div>
-							<div class="row">
-								<div class="hr-v col s4">
-									<i class="fas fa-thumbs-up small"></i><h6>${likes}</h6>
-								</div>
-								<div class="hr-v col s4">
-									<i class="fas fa-eye small"></i><h6>${views}</h6>
-								</div>
-								<div class="col s4">
-									<i class="fas fa-download small"></i><h6>${downloads}</h6>
-								</div>
+							<div class="hr-r col s4">
+								<i class="fas fa-eye small"></i><h5>${views}</h5>
+							</div>
+							<div class="col s4">
+								<i class="fas fa-download small"></i><h5>${downloads}</h5>
+							</div>
+						</div>
+					</div>
+    				<div class="card-image">
+        				<div id="spnImg" class="lds-ring center"><div></div><div></div><div></div><div></div></div>
+        				<div class="btn-floating btn-large halfway-fab left">
+        					<i id="spnUser" class="fas fa-user"></i>
+        				</div>
+        			</div>
+        			<div class="card-content">
+        				<div class="row">
+							<div class="col s12">
+								<span class="card-title grey-text text-darken-4 center">${userName}</span>
 							</div>
 						</div>
         			</div>
-				</div>
+    			</div>
 				`;
 
 				// Inyectar Estructura de carta Html
@@ -97,10 +103,16 @@ class Interface
 				spinner = elmOut.querySelector('#spnImg');
 				elmOut.querySelector('#spnImg').parentElement.replaceChild(img,spinner);
 
-				/* Habilitar botón de re-busqueda */
+				/* Cambiar estética */
 
+				// Habilitar botón de re-busqueda
 				btn.classList.remove('disabled');
 				btn.classList.remove('pulse');
+
+				// Quitar propiedad "valign-wrapper" cuando la carta es mas grande que la pantalla.
+				// console.log(`${elmOut.offsetHeight} vs ${document.querySelector('section').offsetHeight}`);
+				if(elmOut.offsetHeight > document.querySelector('section').offsetHeight)
+					document.querySelector('section').classList.remove('valign-wrapper');
 			});
 	}
 }
