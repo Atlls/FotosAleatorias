@@ -11,8 +11,33 @@ class Interface
 		this.genImage();
 	}
 
+	// Cambia el estilo de un icono si existe o no la id de imagen en el LS
+	checkFV(id)
+	{
+		let favorites = getFavoritesFromLS();
+
+		// Verificar existencia previa...
+		let index = favorites.indexOf(id);
+
+		if(index === -1)
+		{
+
+			// Colocar sin contorno.
+			btnFV.childNodes[1].classList.remove('fas');
+			btnFV.childNodes[1].classList.add('far');
+		}
+		else
+		{
+
+			// Colocar con contorno.
+			btnFV.childNodes[1].classList.remove('far');
+			btnFV.childNodes[1].classList.add('fas');
+		}
+	}
+
 	putSpinner()
 	{
+
 		// Colocar propiedad "valign-wrapper" y centrar spinner...
 		document.querySelector('section').classList.add('valign-wrapper');
 
@@ -30,9 +55,9 @@ class Interface
 			.then( async data => 
 			{
 
-				// Verificar visibilidad del botón de re-búsqueda
-				if(btn.classList.contains('hide'))
-					btn.classList.remove('hide');
+				//* Verificar visibilidad del botón de re-búsqueda
+				if(btnRS.classList.contains('hide'))
+					btnRS.classList.remove('hide');
 
 				/* Preparar datos de salida */
 				
@@ -42,8 +67,12 @@ class Interface
 				const likes 	= data.hits[0].likes;
 				const downloads = data.hits[0].downloads;
 				const views 	= data.hits[0].views;
+				const imageId 	= data.hits[0].id;
 
-				console.log(data);
+				// Cambiar Estilos del botón de Favoritos.
+				ui.checkFV(`${imageId}`);
+
+				// console.log(data);
 
 				// Crear Estrcutura Html
 				let out = '';
@@ -66,7 +95,7 @@ class Interface
 							</div>
 						</div>
 					</div>
-    				<div class="card-image">
+    				<div imageId="${imageId}" class="card-image">
         				<div id="spnImg" class="lds-ring center"><div></div><div></div><div></div><div></div></div>
         				<div class="btn-floating btn-large halfway-fab left">
         					<i id="spnUser" class="fas fa-user"></i>
@@ -75,6 +104,7 @@ class Interface
         			<div class="card-content">
         				<div class="row">
 							<div class="col s12">
+								<div id="imageId" class="hide"></div>
 								<span class="card-title grey-text text-darken-4 center">${userName}</span>
 							</div>
 						</div>
@@ -106,8 +136,8 @@ class Interface
 				/* Cambiar estética */
 
 				// Habilitar botón de re-busqueda
-				btn.classList.remove('disabled');
-				btn.classList.remove('pulse');
+				btnRS.classList.remove('disabled');
+				btnRS.classList.remove('pulse');
 
 				// Quitar propiedad "valign-wrapper" cuando la carta es mas grande que la pantalla.
 				// console.log(`${elmOut.offsetHeight} vs ${document.querySelector('section').offsetHeight}`);
