@@ -12,6 +12,11 @@
   border-radius: 5px;
 }
 
+html{
+  scroll-behavior: smooth;
+  overflow: hidden;
+}
+
 .row{
   margin: 0;
 }
@@ -20,12 +25,19 @@
   width: 95%;
 }
 
-nav .nav-wrapper{
-  z-index: 1;
+.navbar-fixed, nav{
+  height: 8vh;
+  line-height: 8vh;
 }
 
-section{
-  height: 85vh;
+/* h5? */
+nav h5{
+  color: white;
+}
+
+#photo{
+  height: 84vh;
+  overflow: auto;
 }
 
 i{
@@ -53,20 +65,86 @@ h5{
   margin-bottom: 20px;
 }
 
-.fixed{
+#btnsAux{
+  position: relative;
+  width: 100vw;
+  height: 8vh;
+}
+
+/* ! */
+#btns{
   position: fixed;
-  height: 5rem;
-  width: 5rem;
-  bottom: 1vh;
-  z-index: 1;
+  bottom: 0;
+  width: 100vw;
+  height: 8vh;
+}
+
+.fixed{
+  position: absolute;
+  top: 0.5vh;
+}
+
+.btn-floating{
+  height: 7vh;
+  width: 7vh;
 }
 
 #research{
-  right: 1vh;
-} 
+  right: 5vw;
+}
 
+/* ! */
 #favorites{
-  right: 6rem;
+  right: 23vw;
+}
+
+#viewFV{
+  left: 5vw;
+}
+
+#fv{
+  height: 100vh;
+}
+
+@media only screen and (max-height: 620px) {
+
+  /*Ajuste de altura de secciones*/
+
+  .navbar-fixed, nav{
+    height: 15vh;
+  }
+
+  #photo{
+    height: 69vh;
+  }
+
+  #btnsAux{
+    height: 16vh;
+  }
+
+  #btns{
+    height: 16vh;
+  }
+
+  /* Ajustes de tamaño y posicionamiento de botones */
+
+  .btn-floating{
+    height: 14vh;
+    width: 14vh;
+  }
+
+  #research{
+    right: 6vw;
+  }
+
+  #favorites{
+    right: 14vw;
+  }
+
+  #viewFV{
+    left: 6vw;
+  }
+
 }
 
 /*Spinner*/

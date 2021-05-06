@@ -12,27 +12,50 @@
 </head>
 <body class="grey darken-4">
     
+    <!-- Header -->
+
     <div class="navbar-fixed">
-        <nav>
-            <div class="nav-wrapper grey darken-3">
-                <a href="#" class="brand-logo center">Fotos_Aleatorias</a>
+        <nav class="grey darken-3">
+            <div class="nav-wrapper valign-wrapper">
+                <a href="#" class="brand-logo center">
+                    <h5> Fotos_Aleatorias</h5>
+                </a>
             </div>
         </nav>
     </div>
 
-    <section class="valign-wrapper">
+    <!-- Fotos -->
+
+    <section id="photo" class="valign-wrapper">
         <div id="out" class="container center-align">
             <!-- Acá se iyecta: El Spinner inicial y la carta con los datos de la imagen y el botón de recarga. -->
+        </div> 
+    </section>
+
+    <!-- Botones --> 
+
+    <section id="btnsAux" class="transparent">
+        <div id="btns" class="transparent z-depth-3">
+            <button id="viewFV" class="btn-floating waves-effect waves-light pink darken-4 fixed" type="submit" name="action">
+                <i class="fas fa-bookmark"></i>
+            </button>
+            <!-- <aside> -->
+                <button id="favorites" class="btn-floating waves-effect waves-light pink darken-4 fixed" type="submit" name="action">
+                    <i class="far fa-heart"></i>
+                </button>
+                <button id="research" class="btn-floating waves-effect waves-light light-green darken-4 disabled pulse fixed" type="submit" name="action">
+                    <i class="fas fa-search"></i>
+                </button> 
+            <!-- </aside> -->
+            
         </div>
     </section>
 
-    <button id="research" class="btn-floating waves-effect waves-light light-green darken-4 disabled pulse fixed" type="submit" name="action">
-        <i class="fas fa-search"></i>
-    </button>
+    <!-- Favoritos -->
 
-    <button id="favorites" class="btn-floating waves-effect waves-light pink darken-4 fixed" type="submit" name="action">
-        <i class="far fa-heart"></i>
-    </button>
+    <section id="fv" class="pink darken-4">
+        <!-- Acá se inyecta: Los elementos de las imagenes favoritas -->
+    </section>
 
 	<script src="js/api.js"></script>
     <script src="js/ui.js"></script>
@@ -40,20 +63,3 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
-
-<!-- Respaldo -->
-<!-- <body class="teal darken-4 valign-wrapper">
-    * Hacer un HEADER
-    <div id="out" class="container center-align">
-        Acá se iyecta: El Spinner inicial y la carta con los datos de la imagen y el botón de recarga.
-    </div>
-
-    <button class="btn-floating waves-effect waves-light disabled pulse fixed" type="submit" name="action">
-        <i class="fas fa-search"></i>
-    </button>
-
-    <script src="js/api.js"></script>
-    <script src="js/ui.js"></script>
-    <script src="js/app.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body> -->

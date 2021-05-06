@@ -1,16 +1,16 @@
 /* Variables globales */
 
-const elmOut = document.querySelector('#out');
+const elmOut   = document.querySelector('#out');
 const btnRS    = document.querySelector('#research');
 const btnFV    = document.querySelector('#favorites');
+const btnVFV   = document.querySelector('#viewFV');
 const API = new Api("20860275-67dba03bc593361fd043ec997");
-const ui = new Interface();
+const ui  = new Interface();
 
 /* Event Listener's */
 
 // Botón de Re-búsqueda.
 btnRS.addEventListener('click',(evt) => {
-	evt.preventDefault();
 
 	// Agregar Clases de estilo.
 	btnRS.classList.add('disabled');
@@ -25,7 +25,6 @@ btnRS.addEventListener('click',(evt) => {
 
 // Botón de Favoritos.
 btnFV.addEventListener('click',(evt) => {
-	evt.preventDefault();
 
 	// Extraer id de imagen
 	const id = document.querySelector('.card-image').getAttribute('imageId');
@@ -35,6 +34,32 @@ btnFV.addEventListener('click',(evt) => {
 
 	// Cambiar Estilos del botón de Favoritos.
 	ui.checkFV(id);
+});
+
+//  Botón de vista de favoritos
+btnVFV.addEventListener('click',(evt) => {
+
+	// Desplazar hacia la pantalla de favoritos, cambiar el iconos de favoritos y ocultar botones de favoritos y busqueda.
+	if(window.scrollY)
+	{
+		window.scrollTo(0,0);
+
+		btnVFV.childNodes[1].classList.add('fa-bookmark');
+		btnVFV.childNodes[1].classList.remove('fa-chevron-up');
+
+		btnRS.classList.remove('hide');
+		btnFV.classList.remove('hide');
+	}
+	else
+	{
+		window.scrollTo(0,131313);
+
+		btnVFV.childNodes[1].classList.add('fa-chevron-up');
+		btnVFV.childNodes[1].classList.remove('fa-bookmark');
+
+		btnRS.classList.add('hide');
+		btnFV.classList.add('hide');
+	}
 });
 
 /* Funciones de LS */
