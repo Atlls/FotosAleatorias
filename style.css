@@ -79,23 +79,30 @@ h5{
   height: 8vh;
 }
 
+#btnsDer{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 20vw;
+  height: 8vh;
+}
+
 .fixed{
   position: absolute;
   top: 0.5vh;
 }
 
 .btn-floating{
-  height: 7vh;
-  width: 7vh;
+  height: 3rem;
+  width: 3rem;
 }
 
 #research{
   right: 5vw;
 }
 
-/* ! */
 #favorites{
-  right: 23vw;
+  left: 0;
 }
 
 #viewFV{
@@ -106,31 +113,12 @@ h5{
   height: 100vh;
 }
 
-@media only screen and (max-height: 620px) {
+@media (max-width: 500px) {
 
-  /*Ajuste de altura de secciones*/
+  /* Posicionamiento de botones */
 
-  .navbar-fixed, nav{
-    height: 15vh;
-  }
-
-  #photo{
-    height: 69vh;
-  }
-
-  #btnsAux{
-    height: 16vh;
-  }
-
-  #btns{
-    height: 16vh;
-  }
-
-  /* Ajustes de tamaño y posicionamiento de botones */
-
-  .btn-floating{
-    height: 14vh;
-    width: 14vh;
+  #btnsDer{
+    width: 35vw;
   }
 
   #research{
@@ -138,7 +126,7 @@ h5{
   }
 
   #favorites{
-    right: 14vw;
+    left: 0;
   }
 
   #viewFV{
