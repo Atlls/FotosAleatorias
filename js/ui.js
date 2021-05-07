@@ -37,6 +37,7 @@ class Interface
 
 	putSpinner()
 	{
+		document.querySelector('section').classList.add('valign-wrapper');
 
 		elmOut.innerHTML = `
 			<div class="lds-ring center"><div></div><div></div><div></div><div></div></div>
