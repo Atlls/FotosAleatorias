@@ -12,12 +12,12 @@ class Interface
 	}
 
 	// Cambia el estilo de un icono si existe o no la id de imagen en el LS
-	checkFV(id)
+	checkFV(objFavorite)
 	{
 		let favorites = getFavoritesFromLS();
 
 		// Verificar existencia previa...
-		let index = favorites.indexOf(id);
+		let index = searchFavorite(objFavorite,favorites);
 
 		if(index === -1)
 		{
@@ -62,11 +62,17 @@ class Interface
 				const downloads = data.hits[0].downloads;
 				const views 	= data.hits[0].views;
 				const imageId 	= data.hits[0].id;
+				const tags  	= data.hits[0].tags;
 
 				// Cambiar Estilos del botón de Favoritos.
-				ui.checkFV(`${imageId}`);
+				ui.checkFV(
+					{
+						id: imageId,
+						tags: tags
+					}
+				);
 
-				// console.log(data);
+				console.log(data.hits[0]);
 
 				// Crear Estrcutura Html
 				let out = '';
@@ -89,7 +95,7 @@ class Interface
 							</div>
 						</div>
 					</div>
-    				<div imageId="${imageId}" class="card-image">
+    				<div imageId="${imageId}" imageTags="${tags}" class="card-image">
         				<div id="spnImg" class="lds-ring center"><div></div><div></div><div></div><div></div></div>
         				<div class="btn-floating btn-large halfway-fab left">
         					<i id="spnUser" class="fas fa-user"></i>
@@ -98,7 +104,7 @@ class Interface
         			<div class="card-content">
         				<div class="row">
 							<div class="col s12">
-								<div id="imageId" class="hide"></div>
+								<div class="hide"></div>
 								<span class="card-title grey-text text-darken-4 center">${userName}</span>
 							</div>
 						</div>

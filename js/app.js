@@ -9,6 +9,9 @@ const ui  = new Interface();
 
 /* Event Listener's */
 
+// Cargar las imagenes favoritas del LS
+document.addEventListener('DOMContentLoaded', genFavoriteFromLS);
+
 // Botón de Re-búsqueda.
 btnRS.addEventListener('click',(evt) => {
 
@@ -26,14 +29,20 @@ btnRS.addEventListener('click',(evt) => {
 // Botón de Favoritos.
 btnFV.addEventListener('click',(evt) => {
 
-	// Extraer id de imagen
-	const id = document.querySelector('.card-image').getAttribute('imageId');
+	// Crear objeto de favoritos.
+	objFavorite =
+	{
+		id:   document.querySelector('.card-image').getAttribute('imageId'),
+		tags: document.querySelector('.card-image').getAttribute('imageTags')
+	}
 
 	// Procesar guardado en LS.
-	saveFavoritesLS(id);
+	saveFavoritesLS(objFavorite);
 
 	// Cambiar Estilos del botón de Favoritos.
-	ui.checkFV(id);
+	ui.checkFV(objFavorite);
+
+	genFavoriteFromLS();
 });
 
 //  Botón de vista de favoritos
@@ -64,15 +73,13 @@ btnVFV.addEventListener('click',(evt) => {
 
 /* Funciones de LS */
 
-function saveFavoritesLS(id)
+function saveFavoritesLS(objFavorite)
 {
-	let favorites = getFavoritesFromLS();
-
-	// Verificar existencia previa...
-	let index = favorites.indexOf(id);
+	const favorites = getFavoritesFromLS();
+	const index = searchFavorite(objFavorite,favorites);
 
 	if(index === -1)
-		favorites.push(id);
+		favorites.push(objFavorite);
 	else
 		favorites.splice(index,1);
 
@@ -90,4 +97,28 @@ function getFavoritesFromLS()
 		favorites = JSON.parse(localStorage.getItem('fav'));
 
 	return favorites;
+}
+
+/* Funciones rutinarias */
+
+function genFavoriteFromLS()
+{
+	console.log('_Cargar por LS');
+}
+
+// Busca el objeto favorito repetido en el arreglo "favorites". -1 si no entontró.
+function searchFavorite(objFavorite,favorites)
+{
+	let index = -1;
+	for([key,values] of Object.entries(favorites)) // O(n)
+	{
+		// console.log(` -> ${values.id} - ${objFavorite.id}, ${key}`);
+		if(values.id == objFavorite.id)
+		{
+			index = Number(key); // XD
+			break;	// XDDDDDDDDDDD
+		}
+	}
+	// console.log(index);
+	return index;
 }
