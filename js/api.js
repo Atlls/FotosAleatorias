@@ -1,3 +1,5 @@
+'use strict';
+
 class Api 
 {
 	constructor(apiKey)
@@ -5,11 +7,9 @@ class Api
 		this.apiKey = apiKey;
 	}
 
-	async getPhoto()
+	async getPhoto(id = ranNumber(70000,0))
 	{
 		let convertir = true;
-
-		let id = ranNumber(70000,0);
 		// id = 1; // Testeo
 		// 39884 -> id de error por no existir dicha petición.
 		// 7642 -> id de error pore status "400".
@@ -52,4 +52,9 @@ class Api
 	}
 }
 
-ranNumber = (max,min) => Math.floor(Math.random() * ((max+min)-min)+min);
+/* Funciones Rutinarias */
+
+function ranNumber(max,min)
+{
+	return Math.floor(Math.random() * ((max+min)-min)+min);
+}

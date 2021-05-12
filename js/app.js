@@ -1,9 +1,12 @@
+'use strict';
+
 /* Variables globales */
 
-const elmOut   = document.querySelector('#out');
-const btnRS    = document.querySelector('#research');
-const btnFV    = document.querySelector('#favorites');
-const btnVFV   = document.querySelector('#viewFV');
+const photoOut   = document.querySelector('#photoOut');
+const fvOut    	 = document.querySelector('#fvOut');
+const btnRS    	 = document.querySelector('#research');
+const btnFV      = document.querySelector('#favorites');
+const btnVFV     = document.querySelector('#viewFV');
 const API = new Api("20860275-67dba03bc593361fd043ec997");
 const ui  = new Interface();
 
@@ -13,27 +16,30 @@ const ui  = new Interface();
 document.addEventListener('DOMContentLoaded', genFavoriteFromLS);
 
 // Botón de Re-búsqueda.
-btnRS.addEventListener('click',(evt) => {
+btnRS.addEventListener('click', (evt) => 
+{
 
 	// Agregar Clases de estilo.
 	btnRS.classList.add('disabled');
 	btnRS.classList.add('pulse');
 
 	// Eliminar Elemento de Imagen actual.
-	elmOut.childNodes[3].remove();
+	photoOut.childNodes[3].remove();
 
 	// Reinicar busqueda de imagen.
 	ui.init();
 });
 
 // Botón de Favoritos.
-btnFV.addEventListener('click',(evt) => {
+btnFV.addEventListener('click', (evt) => 
+{
 
 	// Crear objeto de favoritos.
-	objFavorite =
+	const objFavorite =
 	{
 		id:   document.querySelector('.card-image').getAttribute('imageId'),
-		tags: document.querySelector('.card-image').getAttribute('imageTags')
+		tag:  document.querySelector('.card-image').getAttribute('imageTags'),
+		prev: document.querySelector('.card-image').getAttribute('imagePrev')
 	}
 
 	// Procesar guardado en LS.
@@ -46,29 +52,29 @@ btnFV.addEventListener('click',(evt) => {
 });
 
 //  Botón de vista de favoritos
-btnVFV.addEventListener('click',(evt) => {
-
-	// Desplazar hacia la pantalla de favoritos, cambiar el iconos de favoritos y ocultar botones de favoritos y busqueda.
+btnVFV.addEventListener('click',(evt) => 
+{
 	if(window.scrollY)
-	{
-		window.scrollTo(0,0);
-
-		btnVFV.childNodes[1].classList.add('fa-bookmark');
-		btnVFV.childNodes[1].classList.remove('fa-chevron-up');
-
-		btnRS.classList.remove('hide');
-		btnFV.classList.remove('hide');
-	}
+		scroll('top');
 	else
-	{
-		window.scrollTo(0,131313);
+		scroll('bottom');
+});
 
-		btnVFV.childNodes[1].classList.add('fa-chevron-up');
-		btnVFV.childNodes[1].classList.remove('fa-bookmark');
+document.querySelector("#fvOut").addEventListener('click', (evt) => 
+{
+	let id;
 
-		btnRS.classList.add('hide');
-		btnFV.classList.add('hide');
-	}
+	// Extraer id de imagen a cargar...
+	if(evt.target.tagName === 'DIV')
+		id = evt.target.querySelector('img').getAttribute('imageId');
+	else if(evt.target.tagName != 'P')
+		id = evt.target.getAttribute('imageId');
+
+	// Cargar imagen...
+	ui.putSpinner();
+	ui.genImage(id);
+
+	scroll('top');
 });
 
 /* Funciones de LS */
@@ -99,17 +105,48 @@ function getFavoritesFromLS()
 	return favorites;
 }
 
-/* Funciones rutinarias */
-
 function genFavoriteFromLS()
 {
-	console.log('_Cargar por LS');
+	const favorites = getFavoritesFromLS();
+
+	fvOut.innerHTML = ''; /* ! */
+
+	favorites.forEach((objFav) => {
+		ui.putFavorite(objFav);
+	});
+}
+
+/* Funciones rutinarias */
+
+// Desplazar hacia la pantalla de favoritos, cambiar el iconos de favoritos y ocultar botones de favoritos y busqueda.
+function scroll(dir)
+{
+	if(dir == 'top')
+	{
+		window.scrollTo(0,0);
+
+		btnVFV.childNodes[1].classList.add('fa-bookmark');
+		btnVFV.childNodes[1].classList.remove('fa-chevron-up');
+
+		btnRS.classList.remove('hide');
+		btnFV.classList.remove('hide');
+	}
+	else if(dir == 'bottom')
+	{
+		window.scrollTo(0,131313);
+
+		btnVFV.childNodes[1].classList.add('fa-chevron-up');
+		btnVFV.childNodes[1].classList.remove('fa-bookmark');
+
+		btnRS.classList.add('hide');
+		btnFV.classList.add('hide');
+	}
 }
 
 // Busca el objeto favorito repetido en el arreglo "favorites". -1 si no entontró.
 function searchFavorite(objFavorite,favorites)
 {
-	let index = -1;
+	let index = -1, key, values;
 	for([key,values] of Object.entries(favorites)) // O(n)
 	{
 		// console.log(` -> ${values.id} - ${objFavorite.id}, ${key}`);

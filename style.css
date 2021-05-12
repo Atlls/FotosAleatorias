@@ -41,13 +41,13 @@ nav h5{
   overflow: auto;
 }
 
-i{
-  font-size: 18px;
+i.small{
+  font-size: 1.5rem;
   color: #212121;
 }
 
 h5{
-  font-size: 18px;
+  font-size: 15px;
   margin-bottom: 0;
   margin-top: 5px;
   color: #212121;
@@ -58,7 +58,7 @@ h5{
 }
 
 .card .card-content{
-  padding: 10px;
+  padding: 5px;
 }
 
 .card .card-content .card-title{
@@ -126,7 +126,35 @@ button{
 /* Seccion de Favoritos */
 
 #fv{
-  height: 100vh;
+  height: 84vh;
+  overflow: auto;
+}
+
+#fvOut div{
+  padding: 0;
+}
+
+.fv{
+  margin-top: 15px;
+  height: 12vh;
+}
+
+.fv img{
+  height: 100%;
+}
+
+.fv p{
+  color: white;
+  margin-left: 20px;
+  height: 100%;
+  font-size: 95%;
+}
+
+#fvSec{
+  position: relative;
+  z-index: -1;
+  width: 100vw;
+  height: 8vh;
 }
 
 @media (max-width: 680px) {
