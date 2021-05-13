@@ -123,6 +123,11 @@ button{
   left: 4vw;
 }
 
+#trash{
+  position: absolute;
+  right: 4vw;
+}
+
 /* Seccion de Favoritos */
 
 #fv{

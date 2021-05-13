@@ -4,16 +4,23 @@
 
 const photoOut   = document.querySelector('#photoOut');
 const fvOut    	 = document.querySelector('#fvOut');
+
 const btnRS    	 = document.querySelector('#research');
 const btnFV      = document.querySelector('#favorites');
 const btnVFV     = document.querySelector('#viewFV');
+const btnTR		 = document.querySelector('#trash');
+
 const API = new Api("20860275-67dba03bc593361fd043ec997");
 const ui  = new Interface();
 
 /* Event Listener's */
 
 // Cargar las imagenes favoritas del LS
-document.addEventListener('DOMContentLoaded', genFavoriteFromLS);
+document.addEventListener('DOMContentLoaded', () => 
+{
+	genFavoriteFromLS();
+	ui.scroll('top');
+});
 
 // Botón de Re-búsqueda.
 btnRS.addEventListener('click', (evt) => 
@@ -38,7 +45,7 @@ btnFV.addEventListener('click', (evt) =>
 	const objFavorite =
 	{
 		id:   document.querySelector('.card-image').getAttribute('imageId'),
-		tag:  document.querySelector('.card-image').getAttribute('imageTags'),
+		tag:  document.querySelector('.card-image').getAttribute('imageTag'),
 		prev: document.querySelector('.card-image').getAttribute('imagePrev')
 	}
 
@@ -54,10 +61,33 @@ btnFV.addEventListener('click', (evt) =>
 //  Botón de vista de favoritos
 btnVFV.addEventListener('click',(evt) => 
 {
+
+	/* Mover scroll */
+
 	if(window.scrollY)
-		scroll('top');
+		ui.scroll('top');
 	else
-		scroll('bottom');
+		ui.scroll('bottom');
+
+	/* Verificar existencia de favoritos */
+
+	// Crear objeto de favoritos.
+	const objFavorite =
+	{
+		id:   document.querySelector('.card-image').getAttribute('imageId'),
+		tag:  document.querySelector('.card-image').getAttribute('imageTag'),
+		prev: document.querySelector('.card-image').getAttribute('imagePrev')
+	}
+
+	// Cambiar Estilos del botón de Favoritos.
+	ui.checkFV(objFavorite);
+});
+
+// Botón de eliminar todos los favoritos
+btnTR.addEventListener('click', (evt) => 
+{
+	localStorage.removeItem('fav');
+	genFavoriteFromLS();
 });
 
 document.querySelector("#fvOut").addEventListener('click', (evt) => 
@@ -74,7 +104,7 @@ document.querySelector("#fvOut").addEventListener('click', (evt) =>
 	ui.putSpinner();
 	ui.genImage(id);
 
-	scroll('top');
+	ui.scroll('top');
 });
 
 /* Funciones de LS */
@@ -92,6 +122,24 @@ function saveFavoritesLS(objFavorite)
 	localStorage.setItem('fav',JSON.stringify(favorites));
 }
 
+function genFavoriteFromLS()
+{
+	const favorites = getFavoritesFromLS();
+
+	// Eliminar los div's favoritos anteriores.
+	fvOut.querySelectorAll('.fv').forEach((div) => div.remove());
+
+	if(favorites.length) 
+	{
+		ui.msgSecionFv(false);
+		favorites.forEach((objFav) => ui.putFavorite(objFav));
+	}
+	else
+	{
+		ui.msgSecionFv(true);
+	}
+}
+
 function getFavoritesFromLS()
 {
 	let favorites;
@@ -105,43 +153,7 @@ function getFavoritesFromLS()
 	return favorites;
 }
 
-function genFavoriteFromLS()
-{
-	const favorites = getFavoritesFromLS();
-
-	fvOut.innerHTML = ''; /* ! */
-
-	favorites.forEach((objFav) => {
-		ui.putFavorite(objFav);
-	});
-}
-
 /* Funciones rutinarias */
-
-// Desplazar hacia la pantalla de favoritos, cambiar el iconos de favoritos y ocultar botones de favoritos y busqueda.
-function scroll(dir)
-{
-	if(dir == 'top')
-	{
-		window.scrollTo(0,0);
-
-		btnVFV.childNodes[1].classList.add('fa-bookmark');
-		btnVFV.childNodes[1].classList.remove('fa-chevron-up');
-
-		btnRS.classList.remove('hide');
-		btnFV.classList.remove('hide');
-	}
-	else if(dir == 'bottom')
-	{
-		window.scrollTo(0,131313);
-
-		btnVFV.childNodes[1].classList.add('fa-chevron-up');
-		btnVFV.childNodes[1].classList.remove('fa-bookmark');
-
-		btnRS.classList.add('hide');
-		btnFV.classList.add('hide');
-	}
-}
 
 // Busca el objeto favorito repetido en el arreglo "favorites". -1 si no entontró.
 function searchFavorite(objFavorite,favorites)

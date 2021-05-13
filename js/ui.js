@@ -69,7 +69,7 @@ class Interface
 							</div>
 						</div>
         			</div>
-    				<div imageId="${imageId}" imageTags="${tag}" imagePrev="${prev}" class="card-image">
+    				<div imageId="${imageId}" imageTag="${tag}" imagePrev="${prev}" class="card-image">
         				<div id="spnImg" class="lds-ring center"><div></div><div></div><div></div><div></div></div>
         				<div class="btn-floating btn-large halfway-fab left">
         					<i id="spnUser" class="fas fa-user"></i>
@@ -167,6 +167,49 @@ class Interface
 			btnFV.childNodes[1].classList.remove('far');
 			btnFV.childNodes[1].classList.add('fas');
 		}
+	}
+
+	// Desplazar hacia la pantalla de favoritos, cambiar el iconos de favoritos y ocultar botones de favoritos y busqueda.
+	scroll(dir)
+	{
+		if(dir == 'top')
+		{
+			window.scrollTo(0,0);
+
+			btnVFV.childNodes[1].classList.add('fa-bookmark');
+			btnVFV.childNodes[1].classList.remove('fa-chevron-up');
+
+			btnRS.classList.remove('hide');
+			btnFV.classList.remove('hide');
+			btnTR.classList.add('hide');
+		}
+		else if(dir == 'bottom')
+		{
+			window.scrollTo(0,131313);
+
+			btnVFV.childNodes[1].classList.add('fa-chevron-up');
+			btnVFV.childNodes[1].classList.remove('fa-bookmark');
+
+			btnRS.classList.add('hide');
+			btnFV.classList.add('hide');
+			btnTR.classList.remove('hide');
+		}
+	}
+
+	msgSecionFv(enable)
+	{
+		if(enable)
+		{
+			fvOut.parentElement.parentElement.classList.add('valign-wrapper');
+			fvOut.parentElement.classList.add('center-align');
+			fvOut.querySelector('#msgFv').classList.remove('hide');
+		}
+		else
+		{
+			fvOut.parentElement.parentElement.classList.remove('valign-wrapper');
+			fvOut.parentElement.classList.remove('center-align');
+			fvOut.querySelector('#msgFv').classList.add('hide');
+		}	
 	}
 }
 
