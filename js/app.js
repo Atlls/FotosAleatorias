@@ -44,6 +44,7 @@ btnFV.addEventListener('click', (evt) =>
 	// Crear objeto de favoritos.
 	const objFavorite =
 	{
+		user: document.querySelector('.card-title b').textContent,
 		id:   document.querySelector('.card-image').getAttribute('imageId'),
 		tag:  document.querySelector('.card-image').getAttribute('imageTag'),
 		prev: document.querySelector('.card-image').getAttribute('imagePrev')
@@ -72,8 +73,10 @@ btnVFV.addEventListener('click',(evt) =>
 	/* Verificar existencia de favoritos */
 
 	// Crear objeto de favoritos.
+	// console.log(document.querySelector('.card-title b'));
 	const objFavorite =
 	{
+		user: document.querySelector('.card-title b').textContent,
 		id:   document.querySelector('.card-image').getAttribute('imageId'),
 		tag:  document.querySelector('.card-image').getAttribute('imageTag'),
 		prev: document.querySelector('.card-image').getAttribute('imagePrev')

@@ -18,8 +18,8 @@ class Interface
 		document.querySelector('section').classList.add('valign-wrapper');
 
 		photoOut.innerHTML = `
-			<div class="lds-ring center"><div></div><div></div><div></div><div></div></div>
-			<h6 class="white-text">
+			<div class="lds-ring center grey-text"><div></div><div></div><div></div><div></div></div>
+			<h6 class="grey-text">
             	Buscando Imagen Aleatoria...
             </h6>
 		`;
@@ -47,6 +47,7 @@ class Interface
 				ui.checkFV(
 					{
 						id: imageId,
+						user: userName,
 						tag: tag,
 						prev: prev
 					}
@@ -60,12 +61,12 @@ class Interface
 
 				<!-- Carta con la data de la imagen -->
 				
-				<div class="card light-green darken-4">
+				<div class="card grey darken-3">
 					<div class="card-content">
         				<div class="row">
 							<div class="col s12">
 								<div class="hide"></div>
-								<span class="card-title grey-text text-darken-4 center">${userName}</span>
+								<span class="card-title grey-text center">por: <b class="grey-text text-lighten-2">${userName}</b></span>
 							</div>
 						</div>
         			</div>
@@ -79,14 +80,14 @@ class Interface
 						<div class="row">
 							<div class="col s9 offset-s3 m6 offset-m6">
 								<div class="row">
-									<div class="hr-r col s4 ">
-										<i class="fas fa-thumbs-up small"></i><h5>${likes}</h5>
+									<div class="hr-r col s4">
+										<h5 class="center"><i class="fas fa-eye small"></i>  ${views}</h5>
 									</div>
 									<div class="hr-r col s4">
-										<i class="fas fa-eye small"></i><h5>${views}</h5>
+										<h5 class="center"><i class="fas fa-download small"></i>  ${downloads}</h5>
 									</div>
 									<div class="col s4">
-										<i class="fas fa-download small"></i><h5>${downloads}</h5>
+										<h5 class="center"><i class="fas fa-grin-hearts small"></i>  ${likes}</h5>
 									</div>
 								</div>
 							</div>
@@ -135,8 +136,10 @@ class Interface
 		let out = '';
 		out = `
 			<div class="col m6 s12 z-depth-1 fv">
-        		<p class="left">
-            		${objFavorite.tag}
+        		<p class="left pink-text text-lighten-4">
+        			<b>[</b> Autor: <b>${objFavorite.user} ]</b> 
+        			<br>
+            		"<b>${objFavorite.tag}</b>"
         		</p>
         		<img imageId="${objFavorite.id}" class="right" src="${objFavorite.prev}" alt="">
     		</div>

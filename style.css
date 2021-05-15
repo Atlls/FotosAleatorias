@@ -1,3 +1,7 @@
+body{
+  background-color: #141414;
+}
+
 *{
   font-family: monospace;
 }
@@ -8,7 +12,7 @@
 }
 
 ::-webkit-scrollbar-thumb{
-  background-color: #33691e;
+  background-color: #424242;
   border-radius: 5px;
 }
 
@@ -30,10 +34,13 @@ html{
   line-height: 8vh;
 }
 
-/* h5? */
 nav h5{
-  color: white;
+  color: #bdbdbd;
   margin: 0 5px;
+}
+
+span{
+  font-size: 8px;
 }
 
 #photo{
@@ -42,15 +49,19 @@ nav h5{
 }
 
 i.small{
-  font-size: 1.5rem;
+  font-size: 1.15rem;
   color: #212121;
 }
 
 h5{
-  font-size: 15px;
+  font-size: 16px;
   margin-bottom: 0;
   margin-top: 5px;
-  color: #212121;
+  color: #282828;
+}
+
+h5.right{
+  margin-left: 10px;
 }
 
 .hr-r{
@@ -58,10 +69,12 @@ h5{
 }
 
 .card .card-content{
-  padding: 5px;
+
+  padding: 10px;
 }
 
 .card .card-content .card-title{
+  font-size: 20px;
   font-family: sans-serif;
   margin: 0;
 }
@@ -93,7 +106,7 @@ h5{
   height: 8vh;
 }
 
-/* Botones en sí */
+/* Botones */
 
 button{
   margin-top: 0.5vh;
@@ -107,7 +120,7 @@ button{
 .btn-floating i{
   font-size: 18px;
   margin-top: 1px;
-  color: white;
+  color: #bdbdbd;
 }
 
 #research{
@@ -137,6 +150,7 @@ button{
 
 #fvOut div{
   padding: 0;
+  color: black;
 }
 
 .fv{
@@ -149,8 +163,9 @@ button{
 }
 
 .fv p{
-  color: white;
-  margin-left: 20px;
+  color: #bdbdbd;
+  margin-top: 10px;
+  margin-left: 10px;
   height: 100%;
   font-size: 95%;
 }
